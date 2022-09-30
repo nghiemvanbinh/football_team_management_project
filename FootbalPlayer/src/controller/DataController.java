@@ -6,6 +6,7 @@ import model.FootballPlayer;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DataController {
@@ -72,7 +73,7 @@ public class DataController {
         closeFileAfterRead(filename);
         return players;
     }
-    public void updatePlayerFile(ArrayList<FootballPlayer> list,String fileName){
+    public void updatePlayerFile(List<FootballPlayer> list, String fileName){
       File file = new File(fileName);
       if(file.exists()){
           file.delete();
