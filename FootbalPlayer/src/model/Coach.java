@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Scanner;
+
 public class Coach extends Member{
     private String coachtype;
     private String idCoach;
@@ -42,5 +44,26 @@ public class Coach extends Member{
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    @Override
+    public void Input(Scanner sc) {
+        super.Input(sc);
+        System.out.println("Nhập vào vị trí huấn luyện");
+        coachtype = sc.nextLine();
+        System.out.println("Nhập vào mã Id huấn luận viên");
+        idCoach = sc.nextLine();
+        System.out.println("Nhập vào số năm kinh nghiệm");
+        experience = Integer.parseInt(sc.nextLine());
+    }
+
+    @Override
+    public void showInfo() {
+        super.showInfo();
+        System.out.println("Coach{" +
+                "coachtype='" + coachtype + '\'' +
+                ", idCoach='" + idCoach + '\'' +
+                ", experience=" + experience +
+                '}');
     }
 }

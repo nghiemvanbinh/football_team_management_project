@@ -8,6 +8,8 @@ public class Member {
     private String nationality;
     private int salary;
 
+
+
     public Member() {
     }
 
@@ -70,6 +72,6 @@ public class Member {
                 '}';
     }
     public void showInfo(){
-        System.out.println(toString());
+        System.out.print(toString());
     }
 }
