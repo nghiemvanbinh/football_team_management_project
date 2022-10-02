@@ -87,7 +87,7 @@ public class Main {
 
         int chooseClub = 0;
         String fileClub = "fileClub";
-        List<Club> clubs = new ArrayList<>();
+        ArrayList<Club> clubs = new ArrayList<>();
         Club club = new Club();
 
         /*-----------------------------------------------*/
@@ -136,14 +136,21 @@ public class Main {
                             case 3:
                                 System.out.println("Danh sách huấn luận viên");
                                 coaches = data.readCoachFromFile(fileCoach);
-                                for (Coach fp : coaches) {
-                                    fp.showInfo();
+                                if(coaches.isEmpty()) System.out.println("Không có huấn luận viên nào để xóa");
+                                else {
+                                    for (Coach fp : coaches) {
+                                        fp.showInfo();
+                                    }
+                                    System.out.println("Mời nhập id huấn luận viên bạn muốn xóa");
+                                    String id = sc.nextLine();
+                                    long filterHLv = coaches.stream().filter(i -> i.getIdCoach().equals(id)).count();
+                                    if (filterHLv == 0) System.out.println("Không đúng Id huấn luận viên nào");
+                                    else {
+                                        coaches.removeIf(fp -> fp.getIdCoach().equals(id));
+                                        data.updateCoachFile(coaches, fileCoach);
+                                        System.out.println("Da xoa");
+                                    }
                                 }
-                                System.out.println("Mời nhập id huấn luận viên bạn muốn xóa");
-                                String id = sc.nextLine();
-                                coaches.removeIf(fp -> fp.getIdCoach().equals(id));
-                                data.updateCoachFile(coaches, fileCoach);
-                                System.out.println("Da xoa");
                                 break;
                             case 4:
                                 System.out.println("Quay lại main");
@@ -181,14 +188,18 @@ public class Main {
                                 break;
                             case 3:// Cập nhật cầu thủ vào file
                                 players = data.readPlayerFromFile(filePlayer);
-                                for (FootballPlayer fp : players) {
-                                    fp.showInfo();
+
+                                if(players.isEmpty() ) System.out.println("Không có cầu thủ nào để xóa");
+                                else {
+                                    for (FootballPlayer fp : players) {
+                                        fp.showInfo();
+                                    }
+                                    System.out.println("Mời nhập id cầu thủ bạn muốn xóa");
+                                    String id = sc.nextLine();
+                                    players.removeIf(fp -> fp.getIdPlayer().equals(id));
+                                    data.updatePlayerFile(players, filePlayer);
+                                    System.out.println("Da xoa");
                                 }
-                                System.out.println("Mời nhập id cầu thủ bạn muốn xóa");
-                                String id = sc.nextLine();
-                                players.removeIf(fp -> fp.getIdPlayer().equals(id));
-                                data.updatePlayerFile(players, filePlayer);
-                                System.out.println("Da xoa");
                                 break;
                             case 4:// Thêm 1 cầu thủ vào 1 đội bóng
                                 clubs = data.readClubFromFile(fileClub);
@@ -212,19 +223,19 @@ public class Main {
                                                 }
                                                 System.out.println("Nhập id cầu thủ bạn muốn thêm, q thoát");
                                                 String idfb = sc.nextLine();
-                                                if(idfb.equals("q"))break;
-                                                if(checkPlayerList(players,idfb)==null){
+                                                if (idfb.equals("q")) break;
+                                                if (checkPlayerList(players, idfb) == null) {
                                                     System.out.println("Id không tồn tại, nhập lại");
-                                                }
-                                                else {
+                                                } else {
                                                     if (!checkPlayerInClub(clubs, idfb)) {
-                                                        System.out.println("Cầu thủ đã tồn tại mời nhập lại cầu thủ khác");
+                                                        System.out.println("Cầu thủ đã tồn tại mời " +
+                                                                "nhập lại cầu thủ khác");
                                                     } else {
-                                                        System.out.println("Thêm thành công");
-                                                        cl.getFootballPlayers().add(checkPlayerList(players,idfb));
+                                                        System.out.println("Thêm cầu thủ thành công");
+                                                        cl.getFootballPlayers().add(checkPlayerList(players, idfb));
                                                         clubs.removeIf(fp -> fp.getNameClub().equals(cl.getNameClub()));
                                                         clubs.add(cl);
-                                                        data.updateClubFile(clubs,fileClub);
+                                                        data.updateClubFile(clubs, fileClub);
                                                     }
                                                 }
                                             } while (true);
@@ -233,8 +244,9 @@ public class Main {
 
                                 }
                                 break;
-                            case 5:
+                            case 5:// Thêm 1 skill cho cầu thủ
                                 System.out.println("đang phat trien");
+
                                 break;
                             case 6:
                                 System.out.println("Quay lại main");
@@ -250,6 +262,7 @@ public class Main {
                         menuClub();
                         try {
                             chooseClub = Integer.parseInt(sc.nextLine());
+
                         } catch (NumberFormatException e) {
                             System.out.println("");
                             chooseClub = 0;
@@ -333,14 +346,22 @@ public class Main {
                                 break;
                             case 3:// Xóa club
                                 clubs = data.readClubFromFile(fileClub);
-                                for (Club fp : clubs) {
-                                    fp.showInfo();
+                                if (!clubs.isEmpty()) {
+                                    for (Club fp : clubs) {
+                                        fp.showInfo();
+                                    }
+                                    System.out.println("Mời nhập tên đội bóng bạn muốn xóa");
+                                    String id = sc.nextLine();
+                                    long checkidClub = clubs.stream().filter(i->i.getNameClub().equals(id)).count();
+                                    if(checkidClub == 0) System.out.println("Không đúng tên đội bóng cần xóa");
+                                    else {
+                                        clubs.removeIf(fp -> fp.getNameClub().equals(id));
+                                        data.updateClubFile(clubs, fileClub);
+                                        System.out.println("Da xoa");
+                                    }
+                                } else {
+                                    System.out.println("Không có đội bóng nào để xóa");
                                 }
-                                System.out.println("Mời nhập tên đội bóng bạn muốn xóa");
-                                String id = sc.nextLine();
-                                clubs.removeIf(fp -> fp.getNameClub().equals(id));
-                                data.updateClubFile(clubs, fileClub);
-                                System.out.println("Da xoa");
                                 break;
                             case 4:
                                 System.out.println("Quay lại main");
@@ -368,7 +389,7 @@ public class Main {
                                         equals(skill.getId())).count();
                                 if (num == 0) {
                                     data.writeSkillToFile(skill, fileSkill);
-                                } else System.out.println("Cầu thủ đã tồn tại ");
+                                } else System.out.println("Skill đã tồn tại");
                                 break;
                             case 2:
                                 skills = data.readSkillFromFile(fileSkill);
@@ -378,13 +399,16 @@ public class Main {
                                 break;
                             case 3:
                                 skills = data.readSkillFromFile(fileSkill);
-                                for (Skill fp : skills) {
-                                    fp.showInfo();
+                                if(skills.isEmpty()) System.out.println("Không có skill nào để xóa");
+                                else {
+                                    for (Skill fp : skills) {
+                                        fp.showInfo();
+                                    }
+                                    System.out.println("Mời bạn nhập Id Skill muốn xóa");
+                                    String id = sc.nextLine();
+                                    skills.removeIf(i -> i.getId().equals(id));
+                                    data.updateSkillFile(skills, fileSkill);
                                 }
-                                System.out.println("Mời bạn nhập Id skill muốn xóa");
-                                String id = sc.nextLine();
-                                skills.removeIf(i -> i.getId().equals(id));
-                                data.updateSkillFile(skills, fileSkill);
                                 break;
                             case 4:
                                 System.out.println("Quay lại main");
@@ -433,11 +457,12 @@ public class Main {
         }
         return null;
     }
-    private static  FootballPlayer checkPlayerList(List<FootballPlayer> fb,String id){
+
+    private static FootballPlayer checkPlayerList(List<FootballPlayer> fb, String id) {
         for (int i = 0; i < fb.size(); i++) {
-           if(fb.get(i).getIdPlayer().equals(id)){
-               return fb.get(i);
-           }
+            if (fb.get(i).getIdPlayer().equals(id)) {
+                return fb.get(i);
+            }
         }
         return null;
     }

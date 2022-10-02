@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-{"idPlayer":"abc","position":"tien dao","goal":23,"assist":34,"fullname":"van binh","age":23,"nationality":"viet nam","salary":345}
-{"idPlayer":"tre","position":"fg","goal":45,"assist":34,"fullname":"van phu","age":34,"nationality":"viet nam","salary":324}
-=======
-{"idPlayer":"abc","position":"tien dao","goal":42,"assist":3,"fullname":"van binh","age":23,"nationality":"viet nam","salary":234}
->>>>>>> c58b26718e483082df81bcf15b8326dc3c11a001
+{"idPlayer":"6868","position":"tien ve","goal":700,"assist":56,"fullname":"nghiem binh","age":24,"nationality":"viet nam","salary":500000}
+{"idPlayer":"bca","position":"tien dao","goal":32,"assist":21,"fullname":"cong trieu","age":23,"nationality":"viet nam","salary":223}
