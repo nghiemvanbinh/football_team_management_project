@@ -9,9 +9,7 @@ import model.Skill;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-<<<<<<< HEAD
-import java.util.SortedMap;
-import java.util.stream.Collectors;
+
 
 public class Main {
     static void menuMain() {
@@ -22,15 +20,6 @@ public class Main {
         System.out.println("4. Quản lí skill");
         System.out.println("5. Out");
         System.out.println("Mời bạn chọn");
-=======
-import java.util.stream.Collectors;
-
-public class Main {
-    static void showMenu(){
-        System.out.println("1. Thêm cầu thủ");
-        System.out.println("2. Hiển thị danh sách cầu thủ");
-        System.out.println("3. Xóa cầu thủ");
->>>>>>> c58b26718e483082df81bcf15b8326dc3c11a001
     }
 
     static void menuCoach() {
@@ -72,55 +61,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-<<<<<<< HEAD
+
         //------------------varMain-------------------------//
         int chooseMain = 0;
         Scanner sc = new Scanner(System.in);
         DataController data = new DataController();
-        //------------------------------------------------//
-=======
-        int choose=0;
-
-        DataController data = new DataController();
-        var filePlayer = "filePlayer";
-
-     do{
-         Scanner sc = new Scanner(System.in);
-         ArrayList<FootballPlayer> players = new ArrayList<>();
-         showMenu();
-         System.out.println("Mời lựa chọn");
-         choose = Integer.parseInt(sc.nextLine());
-         switch (choose){
-             case 1:
-                 FootballPlayer player = new FootballPlayer();
-                 player.Input(sc);
-                 data.writePlayerToFile(player,filePlayer);
-                 break;
-             case 2:
-                players = data.readPlayerFromFile(filePlayer);
-                for (FootballPlayer player1:players){
-                    player1.showInfo();
-                }
-                break;
-             case 3:
-                 System.out.println("Nhập Id ban muon xoa");
-                 String id = sc.nextLine();
-                 players = data.readPlayerFromFile(filePlayer);
-                 ArrayList<FootballPlayer> playerss = new ArrayList<>();
-                 for (FootballPlayer fb: players
-                      ) {
-                     if(fb.getIdPlayer().equals(id)){
-                         playerss.add(fb);
-                     }
-                 }
-                 players.removeAll(playerss);
-              //   ArrayList<FootballPlayer> removedList = players.stream().filter(l-> l.equals(id)).collect(Collectors.toList());
-                 data.updatePlayerFile(players,filePlayer);
-                 break;
-         }
-     }while (choose!=4);
->>>>>>> c58b26718e483082df81bcf15b8326dc3c11a001
-
         /*------------------varCoach----------------------*/
 
         int chooseCoach = 0;
@@ -154,13 +99,13 @@ public class Main {
         Skill skill = new Skill();
         /*-----------------------------------------------*/
 
-
         do {
             menuMain();
             try {
                 chooseMain = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("");
+                chooseMain = 0;
             }
             switch (chooseMain) {
                 case 1:// Mode HLV
@@ -170,6 +115,7 @@ public class Main {
                             chooseCoach = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             System.out.println("");
+                            chooseCoach = 0;
                         }
                         switch (chooseCoach) {
                             case 1:
@@ -215,6 +161,7 @@ public class Main {
                             choosePlayer = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             System.out.println("");
+                            choosePlayer = 0;
                         }
                         switch (choosePlayer) {
                             case 1:// Thêm cầu thủ vào file
@@ -305,6 +252,7 @@ public class Main {
                             chooseClub = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             System.out.println("");
+                            chooseClub = 0;
                         }
                         switch (chooseClub) {
                             case 1:// Thêm club
@@ -410,6 +358,7 @@ public class Main {
                             chooseSkill = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             System.out.println("");
+                            chooseSkill = 0;
                         }
                         switch (chooseSkill) {
                             case 1:
