@@ -59,7 +59,6 @@ public class FootballPlayer extends Member{
         this.assist = assist;
     }
 
-    @Override
     public void Input(Scanner sc) {
         super.Input(sc);
         System.out.println("Nhập vào mã Id cầu thủ");
@@ -68,8 +67,14 @@ public class FootballPlayer extends Member{
         position = sc.nextLine();
         System.out.println("Nhập vào số bàn thắng");
         goal = Integer.parseInt(sc.nextLine());
+        if(goal < 0){
+            throw new ArithmeticException("Goals cannot be negative!");
+        }
         System.out.println("Nhập vào kiến tạo");
         assist = Integer.parseInt(sc.nextLine());
+        if(assist < 0){
+            throw new ArithmeticException("Assists cannot be negative!");
+        }
     }
 
 

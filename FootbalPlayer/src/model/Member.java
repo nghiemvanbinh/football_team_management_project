@@ -54,12 +54,26 @@ public class Member {
     public void Input(Scanner sc){
         System.out.println("Nhập vào họ tên");
         fullname = sc.nextLine();
+        if(fullname.matches("^[a-zA-Z]*$")){}
+        else System.out.println("Name doesnt qualified");
         System.out.println("Nhập vào tuổi");
-        age = Integer.parseInt(sc.nextLine());
+        try {
+            age = Integer.parseInt(sc.nextLine());
+        }catch(NumberFormatException e){
+            e.getMessage();
+        }if(age < 15){
+            throw new IllegalArgumentException("U-15 cannot be eligible for professional football player/coach");
+        }
         System.out.println("Nhập vào quốc tịch");
         nationality = sc.nextLine();
         System.out.println("Nhập vào lương");
-        salary = Integer.parseInt(sc.nextLine());
+        try {
+            salary = Integer.parseInt(sc.nextLine());
+        }catch (NumberFormatException e){
+            e.getMessage();
+        }if(age < 0){
+            throw new IllegalArgumentException("Wages cannot be a negative number");
+        }
     }
 
     @Override

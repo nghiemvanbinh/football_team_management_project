@@ -1,12 +1,10 @@
 package view;
 
 import controller.DataController;
-import model.Club;
-import model.Coach;
-import model.FootballPlayer;
-import model.Skill;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -95,6 +93,11 @@ public class Main {
         List<Skill> skills = new ArrayList<>();
         Skill skill = new Skill();
         /*-----------------------------------------------*/
+        /*--------------player-skill--------------------*/
+        String fileplayerskill = "playersSkill";
+        ArrayList<PlayerSkill> playerSkills = new ArrayList<>();
+        PlayerSkill playerSkill = new PlayerSkill();
+        //----------------------------------------------//
 
         do {
             menuMain();
@@ -133,7 +136,7 @@ public class Main {
                             case 3:
                                 System.out.println("Danh sách huấn luận viên");
                                 coaches = data.readCoachFromFile(fileCoach);
-                                if(coaches.isEmpty()) System.out.println("Không có huấn luận viên nào để xóa");
+                                if (coaches.isEmpty()) System.out.println("Không có huấn luận viên nào để xóa");
                                 else {
                                     for (Coach fp : coaches) {
                                         fp.showInfo();
@@ -186,7 +189,7 @@ public class Main {
                             case 3:// Cập nhật cầu thủ vào file
                                 players = data.readPlayerFromFile(filePlayer);
 
-                                if(players.isEmpty() ) System.out.println("Không có cầu thủ nào để xóa");
+                                if (players.isEmpty()) System.out.println("Không có cầu thủ nào để xóa");
                                 else {
                                     for (FootballPlayer fp : players) {
                                         fp.showInfo();
@@ -242,8 +245,48 @@ public class Main {
                                 }
                                 break;
                             case 5:// Thêm 1 skill cho cầu thủ
-                                
+                                players = data.readPlayerFromFile(filePlayer);
+                                skills = data.readSkillFromFile(fileSkill);
+                                String idPlayer = null, idSkill = null;
+                                playerSkills = data.readPlayerSkilFromFile(fileplayerskill);
+                                boolean check= false;
+                                if(playerSkills.isEmpty())check = true;
+                                if (players.isEmpty()) System.out.println("Bạn chưa có cầu thủ nào, thoát");
+                                else if (skills.isEmpty()) System.out.println("Bạn chưa có skill vào, thoát");
+                                else {
+                                    do {
+                                        showPlayers(players, filePlayer);
+                                        System.out.println("Nhập id cầu thủ bạn muốn add skill, q để thoát");
+                                        idPlayer = sc.nextLine();
+                                        if (idPlayer.equals("q")) break;
+                                        if (checkPlayerList(players, idPlayer) == null)
+                                            System.out.println("Id ko hợp lệ " +
+                                                    "nhập lại ");
+                                        else break;
 
+                                    } while (true);
+                                    do {
+                                        showSklills(skills, fileSkill);
+                                        System.out.println("Nhập id cầu thủ bạn muốn add skill, q để thoát");
+                                        idSkill = sc.nextLine();
+                                        if (idPlayer.equals("q")) break;
+                                        if (checkSkillList(skills, idSkill) == null)
+                                            System.out.println("Id ko hợp lệ " +
+                                                    "nhập lại ");
+                                        else break;
+                                    } while (true);
+                                }
+                                if (idPlayer != null && idSkill != null) {
+                                    playerSkill.setSkill(checkSkillList(skills, idSkill));
+                                    playerSkill.setFp(checkPlayerList(players, idPlayer));
+                                    playerSkills.add(playerSkill);
+                                    if(check == true)data.writeSkillPlayerToFile(playerSkills, fileplayerskill);
+                                    else data.updatePlayerSkillFile(playerSkills,fileplayerskill);
+                                    System.out.println("Danh sách sau khi add là:");
+                                    data.readPlayerSkilFromFile(fileplayerskill);
+                                } else {
+                                    System.out.println("Thêm thất bại thoát");
+                                }
                                 break;
                             case 6:
                                 System.out.println("Quay lại main");
@@ -349,8 +392,8 @@ public class Main {
                                     }
                                     System.out.println("Mời nhập tên đội bóng bạn muốn xóa");
                                     String id = sc.nextLine();
-                                    long checkidClub = clubs.stream().filter(i->i.getNameClub().equals(id)).count();
-                                    if(checkidClub == 0) System.out.println("Không đúng tên đội bóng cần xóa");
+                                    long checkidClub = clubs.stream().filter(i -> i.getNameClub().equals(id)).count();
+                                    if (checkidClub == 0) System.out.println("Không đúng tên đội bóng cần xóa");
                                     else {
                                         clubs.removeIf(fp -> fp.getNameClub().equals(id));
                                         data.updateClubFile(clubs, fileClub);
@@ -396,7 +439,7 @@ public class Main {
                                 break;
                             case 3:
                                 skills = data.readSkillFromFile(fileSkill);
-                                if(skills.isEmpty()) System.out.println("Không có skill nào để xóa");
+                                if (skills.isEmpty()) System.out.println("Không có skill nào để xóa");
                                 else {
                                     for (Skill fp : skills) {
                                         fp.showInfo();
@@ -425,6 +468,7 @@ public class Main {
             }
         } while (chooseMain != 5);
     }
+
     private static boolean checkCoachInClub(List<Club> club, String id) {
         for (Club cl : club) {
             long num2 = cl.getCoaches().stream().filter(i -> i.getIdCoach().equals(id)).count();
@@ -461,5 +505,30 @@ public class Main {
             }
         }
         return null;
+    }
+
+    private static Skill checkSkillList(List<Skill> fb, String id) {
+        for (int i = 0; i < fb.size(); i++) {
+            if (fb.get(i).getId().equals(id)) {
+                return fb.get(i);
+            }
+        }
+        return null;
+    }
+
+    private static void showPlayers(List<FootballPlayer> list, String file) {
+        DataController data = new DataController();
+        list = data.readPlayerFromFile(file);
+        for (FootballPlayer fp : list) {
+            fp.showInfo();
+        }
+    }
+
+    private static void showSklills(List<Skill> list, String file) {
+        DataController data = new DataController();
+        list = data.readSkillFromFile(file);
+        for (Skill fp : list) {
+            fp.showInfo();
+        }
     }
 }
