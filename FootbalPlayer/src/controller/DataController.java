@@ -189,5 +189,11 @@ public class DataController {
         closeFileAfterWrite(fileName);
     }
     /*---------------Skill- and footballPlayer-----------*/
-
+//    public void writeSkillPlayerToFile(Skill skill, String filename) {
+//        openFileToWrite(filename);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(skill);
+//        printWriter.println(json);
+//        closeFileAfterWrite(filename);
+//    }
 }

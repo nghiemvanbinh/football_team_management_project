@@ -67,6 +67,9 @@ public class Skill {
         System.out.println("Nhập vào chỉ số tốc độ");
         speed = Integer.parseInt(sc.nextLine());
         System.out.println("Nhập vào chỉ số tấn công");
+        attack = Integer.parseInt(sc.nextLine());
+        System.out.println("Nhập chỉ số phòng thủ");
+        defense = Integer.parseInt(sc.nextLine());
 
     }
 

@@ -73,15 +73,13 @@ public class Main {
         List<Coach> coaches = new ArrayList<>();
         Coach coach = new Coach();
 
-        /*-------------------------------------------------*/
-
 
         /*-----------------varFootbalPlayer----------------*/
         int choosePlayer = 0;
         String filePlayer = "filePlayer";
         List<FootballPlayer> players = new ArrayList<>();
         FootballPlayer player = new FootballPlayer();
-        /*------------------------------------------------*/
+
 
         /*-----------------varClub-----------------------*/
 
@@ -90,7 +88,6 @@ public class Main {
         ArrayList<Club> clubs = new ArrayList<>();
         Club club = new Club();
 
-        /*-----------------------------------------------*/
 
         /*-----------------varSkill----------------------*/
         int chooseSkill = 0;
@@ -205,10 +202,10 @@ public class Main {
                                 clubs = data.readClubFromFile(fileClub);
                                 if (clubs.isEmpty()) System.out.println("Bạn chưa có đội bóng nào để thêm");
                                 else {
-                                    for (Club fp : clubs) {
-                                        fp.showInfo();
-                                    }
                                     do {
+                                        for (Club fp : clubs) {
+                                            fp.showInfo();
+                                        }
                                         System.out.println("Nhập id đội bóng bạn muốn thêm cầu thủ, nhập q để thoát");
                                         String name = sc.nextLine();
                                         if (name.equals("q")) break;
@@ -236,16 +233,16 @@ public class Main {
                                                         clubs.removeIf(fp -> fp.getNameClub().equals(cl.getNameClub()));
                                                         clubs.add(cl);
                                                         data.updateClubFile(clubs, fileClub);
+                                                        choosePlayer = 0;
                                                     }
                                                 }
                                             } while (true);
                                         }
                                     } while (true);
-
                                 }
                                 break;
                             case 5:// Thêm 1 skill cho cầu thủ
-                                System.out.println("đang phat trien");
+                                
 
                                 break;
                             case 6:
@@ -428,7 +425,6 @@ public class Main {
             }
         } while (chooseMain != 5);
     }
-
     private static boolean checkCoachInClub(List<Club> club, String id) {
         for (Club cl : club) {
             long num2 = cl.getCoaches().stream().filter(i -> i.getIdCoach().equals(id)).count();
