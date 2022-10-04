@@ -55,13 +55,37 @@ public class Member {
     }
     public void Input(Scanner sc){
         System.out.println("Nhập vào họ tên");
+<<<<<<< HEAD
         fullname = namecheck(sc);
         System.out.println("Nhập vào tuổi");
         age = numcheck(sc, 15);
+=======
+        fullname = sc.nextLine();
+        if(fullname.matches("^[a-zA-Z]*$")){}
+        else System.out.println("Name doesnt qualified");
+        System.out.println("Nhập vào tuổi");
+        try {
+            age = Integer.parseInt(sc.nextLine());
+        }catch(NumberFormatException e){
+            e.getMessage();
+        }if(age < 15){
+            throw new IllegalArgumentException("U-15 cannot be eligible for professional football player/coach");
+        }
+>>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
         System.out.println("Nhập vào quốc tịch");
         nationality = namecheck(sc);
         System.out.println("Nhập vào lương");
+<<<<<<< HEAD
         salary = numcheck(sc, 0 );
+=======
+        try {
+            salary = Integer.parseInt(sc.nextLine());
+        }catch (NumberFormatException e){
+            e.getMessage();
+        }if(age < 0){
+            throw new IllegalArgumentException("Wages cannot be a negative number");
+        }
+>>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
     }
 
     @Override

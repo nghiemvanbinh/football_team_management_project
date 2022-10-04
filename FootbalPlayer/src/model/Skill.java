@@ -67,9 +67,15 @@ public class Skill {
         System.out.println("Nhập vào chỉ số tốc độ");
         speed = numcheck(sc, 0);
         System.out.println("Nhập vào chỉ số tấn công");
+<<<<<<< HEAD
         attack = numcheck(sc,0);
         System.out.println("Nhập chỉ số phòng thủ");
         defense = numcheck(sc,0);
+=======
+        attack = Integer.parseInt(sc.nextLine());
+        System.out.println("Nhập chỉ số phòng thủ");
+        defense = Integer.parseInt(sc.nextLine());
+>>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
 
     }
 
