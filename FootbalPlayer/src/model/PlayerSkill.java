@@ -35,11 +35,7 @@ public class PlayerSkill {
                 ", skill=" + skill +
                 '}';
     }
-<<<<<<< HEAD
    public void showinfo(){
         System.out.println(toString());
     }
-=======
-
->>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
 }

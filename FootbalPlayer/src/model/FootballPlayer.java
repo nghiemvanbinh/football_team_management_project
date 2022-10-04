@@ -66,21 +66,9 @@ public class FootballPlayer extends Member{
         System.out.println("Nhập vào vị trí chơi boóng");
         position = sc.nextLine();
         System.out.println("Nhập vào số bàn thắng");
-<<<<<<< HEAD
         goal = numcheck(sc, 0);
         System.out.println("Nhập vào kiến tạo");
         assist = numcheck(sc, 0);
-=======
-        goal = Integer.parseInt(sc.nextLine());
-        if(goal < 0){
-            throw new ArithmeticException("Goals cannot be negative!");
-        }
-        System.out.println("Nhập vào kiến tạo");
-        assist = Integer.parseInt(sc.nextLine());
-        if(assist < 0){
-            throw new ArithmeticException("Assists cannot be negative!");
-        }
->>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
     }
 
 

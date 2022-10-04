@@ -1,5 +1,6 @@
 package model;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Skill {
@@ -47,9 +48,13 @@ public class Skill {
         return defense;
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
+//    public boolean setDefense(int defense,Scanner sc) {
+//        int def = Integer.parseInt(sc.nextLine());
+//
+//        this.defense = defense;
+//        return true;
+//
+//    }
 
     public String getId() {
         return id;
@@ -63,19 +68,13 @@ public class Skill {
         System.out.println("Nhập vào mã của skill");
         id = sc.nextLine();
         System.out.println("Nhập vào chỉ số sức mạnh");
-        strength = numcheck(sc, 0);
+        while (!numcheck(strength,sc));
         System.out.println("Nhập vào chỉ số tốc độ");
-        speed = numcheck(sc, 0);
+        while (!numcheck(speed,sc));
         System.out.println("Nhập vào chỉ số tấn công");
-<<<<<<< HEAD
-        attack = numcheck(sc,0);
+        while (!numcheck(attack,sc));
         System.out.println("Nhập chỉ số phòng thủ");
-        defense = numcheck(sc,0);
-=======
-        attack = Integer.parseInt(sc.nextLine());
-        System.out.println("Nhập chỉ số phòng thủ");
-        defense = Integer.parseInt(sc.nextLine());
->>>>>>> 448a8a804567f0677c389097dd4897b6179943b6
+        while (!numcheck(defense,sc));
 
     }
 
@@ -93,31 +92,19 @@ public class Skill {
     public void showInfo(){
         System.out.println(toString());
     }
-    public int numcheck(Scanner s, int check) {
-        boolean c = false;
-        boolean cp = false;
-        int res = 0;
-        do {
-            try {
-                res = Integer.parseInt(s.nextLine());
-                c = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Try a number this time");
-            }
-            do {
-                if (res < check) {
-                    try {
-                        System.out.println("Invalid number, number must be greater than " + check);
-                        res = Integer.parseInt(s.nextLine());
-                        c = true;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Try a number this time");
-                    }
-                } else {
-                    cp = true;
-                }
-            } while (cp == false);
-            return res;
-        } while (c == false);
+    public boolean numcheck( int num,Scanner sc) {
+       try {
+           num = Integer.parseInt(sc.nextLine());
+           if(num >15) {
+               return true;
+           }
+           else {
+               System.out.println("Nhập phải lớn hơn 15");
+               return false;
+           }
+       }catch (Exception e){
+           System.out.println("Nhập sai yêu cầu nhập lại");
+       }
+       return false;
     }
 }
