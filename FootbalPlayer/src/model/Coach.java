@@ -48,22 +48,22 @@ public class Coach extends Member{
 
     @Override
     public void Input(Scanner sc) {
-        super.Input(sc);
-        System.out.println("Nhập vào vị trí huấn luyện");
-        coachtype = sc.nextLine();
         System.out.println("Nhập vào mã Id huấn luận viên");
         idCoach = sc.nextLine();
+        super.Input(sc);
+        System.out.println("Nhập vào vị trí huấn luyện");
+        coachtype = namecheck(sc);
         System.out.println("Nhập vào số năm kinh nghiệm");
-        experience = Integer.parseInt(sc.nextLine());
+        experience = numcheck(sc, 0);
     }
 
     @Override
     public void showInfo() {
-        super.showInfo();
-        System.out.println("Coach{" +
+        System.out.print("Coach{" +
+                " idCoach='" + idCoach + '\'' +
                 "coachtype='" + coachtype + '\'' +
-                ", idCoach='" + idCoach + '\'' +
                 ", experience=" + experience +
                 '}');
+        super.showInfo();
     }
 }

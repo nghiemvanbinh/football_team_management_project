@@ -63,10 +63,13 @@ public class Skill {
         System.out.println("Nhập vào mã của skill");
         id = sc.nextLine();
         System.out.println("Nhập vào chỉ số sức mạnh");
-        strength = Integer.parseInt(sc.nextLine());
+        strength = numcheck(sc, 0);
         System.out.println("Nhập vào chỉ số tốc độ");
-        speed = Integer.parseInt(sc.nextLine());
+        speed = numcheck(sc, 0);
         System.out.println("Nhập vào chỉ số tấn công");
+        attack = numcheck(sc,0);
+        System.out.println("Nhập chỉ số phòng thủ");
+        defense = numcheck(sc,0);
 
     }
 
@@ -83,5 +86,32 @@ public class Skill {
 
     public void showInfo(){
         System.out.println(toString());
+    }
+    public int numcheck(Scanner s, int check) {
+        boolean c = false;
+        boolean cp = false;
+        int res = 0;
+        do {
+            try {
+                res = Integer.parseInt(s.nextLine());
+                c = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Try a number this time");
+            }
+            do {
+                if (res < check) {
+                    try {
+                        System.out.println("Invalid number, number must be greater than " + check);
+                        res = Integer.parseInt(s.nextLine());
+                        c = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Try a number this time");
+                    }
+                } else {
+                    cp = true;
+                }
+            } while (cp == false);
+            return res;
+        } while (c == false);
     }
 }

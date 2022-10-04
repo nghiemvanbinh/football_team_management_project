@@ -59,29 +59,28 @@ public class FootballPlayer extends Member{
         this.assist = assist;
     }
 
-    @Override
     public void Input(Scanner sc) {
-        super.Input(sc);
         System.out.println("Nhập vào mã Id cầu thủ");
         idPlayer = sc.nextLine();
+        super.Input(sc);
         System.out.println("Nhập vào vị trí chơi boóng");
         position = sc.nextLine();
         System.out.println("Nhập vào số bàn thắng");
-        goal = Integer.parseInt(sc.nextLine());
+        goal = numcheck(sc, 0);
         System.out.println("Nhập vào kiến tạo");
-        assist = Integer.parseInt(sc.nextLine());
+        assist = numcheck(sc, 0);
     }
 
 
 
     @Override
     public void showInfo() {
-        super.showInfo();
         System.out.println("FootballPlayer{" +
                 "idPlayer='" + idPlayer + '\'' +
                 ", position='" + position + '\'' +
                 ", goal=" + goal +
                 ", assist=" + assist +
                 '}');
+        super.showInfo();
     }
 }

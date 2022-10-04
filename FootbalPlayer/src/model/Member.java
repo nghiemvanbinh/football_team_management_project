@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Member {
@@ -53,25 +55,68 @@ public class Member {
     }
     public void Input(Scanner sc){
         System.out.println("Nhập vào họ tên");
-        fullname = sc.nextLine();
+        fullname = namecheck(sc);
         System.out.println("Nhập vào tuổi");
-        age = Integer.parseInt(sc.nextLine());
+        age = numcheck(sc, 15);
         System.out.println("Nhập vào quốc tịch");
-        nationality = sc.nextLine();
+        nationality = namecheck(sc);
         System.out.println("Nhập vào lương");
-        salary = Integer.parseInt(sc.nextLine());
+        salary = numcheck(sc, 0 );
     }
 
     @Override
     public String toString() {
-        return "Member{" +
+        return ",{" +
                 "fullname='" + fullname + '\'' +
                 ", age=" + age +
                 ", nationality='" + nationality + '\'' +
                 ", salary=" + salary +
                 '}';
     }
-    public void showInfo(){
+
+    public void showInfo() {
         System.out.print(toString());
+    }
+
+    public String namecheck(Scanner s) {
+        boolean c = false;
+        String res = null;
+        do {
+            try {
+                res = s.nextLine();
+                c = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input words is only included here");
+            }
+        } while (c == false);
+        return res;
+    }
+
+    public int numcheck(Scanner s, int check) {
+        boolean c = false;
+        boolean cp = false;
+        int res = 0;
+        do {
+            try {
+                res = Integer.parseInt(s.nextLine());
+                c = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Try a number this time");
+            }
+            do {
+                if (res < check) {
+                    try {
+                        System.out.println("Invalid number, number must be greater than " + check);
+                        res = Integer.parseInt(s.nextLine());
+                        c = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Try a number this time");
+                    }
+                } else {
+                    cp = true;
+                }
+            } while (cp == false);
+            return res;
+        } while (c == false);
     }
 }
